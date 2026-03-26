@@ -1,0 +1,103 @@
+{
+  "rounds": [
+    {
+      "id": 1,
+      "title": "The Cloud Foundation",
+      "description": "The first chamber of the AWS data center",
+      "storyIntro": "You wake up in a cold, humming server room. Rows of blinking lights stretch into the darkness. A holographic figure materializes before you — the Cloud Guardian. 'Welcome, traveler,' the figure whispers. 'You've been trapped inside the AWS data center. The only way out is through three locked chambers. Each chamber holds four encrypted terminals. Crack the code on each terminal to unlock the door. But beware — you have only 10 minutes per chamber before the security lockdown seals you in forever.' The Guardian gestures toward the first glowing terminal. 'Let's begin with the foundations. Show me you understand the basics of the cloud.'",
+      "storyOutro": "The first door groans open, revealing a corridor bathed in purple light. 'Impressive,' the Guardian nods. 'But the next chamber won't be so forgiving. The Architect's Vault awaits — where only those who understand AWS architecture may pass.'",
+      "questions": [
+        {
+          "id": 1,
+          "question": "The first terminal flickers to life. A message appears: 'What does AWS stand for? Type the full name to proceed.'",
+          "hint": "Think about the company that created this cloud platform and what kind of services it provides on the web.",
+          "correctAnswer": "Amazon Web Services"
+        },
+        {
+          "id": 2,
+          "question": "The second terminal hums. 'Which AWS service is the primary object storage service? Name it to unlock.'",
+          "hint": "It's named with the letter S and a number. Think: Simple Storage Service.",
+          "correctAnswer": "Amazon S3"
+        },
+        {
+          "id": 3,
+          "question": "Sparks fly from the third terminal. 'What is the default compute service in AWS? The one that gives you virtual servers in the cloud.'",
+          "hint": "EC stands for Elastic Compute. What's the full service name?",
+          "correctAnswer": "Amazon EC2"
+        },
+        {
+          "id": 4,
+          "question": "The final terminal in this chamber glows red. 'Which AWS service provides a managed relational database? Answer correctly and the first door opens.'",
+          "hint": "RDS — Relational Database Service. What's the full AWS service name?",
+          "correctAnswer": "Amazon RDS"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "The Architect's Vault",
+      "description": "The second chamber — where architecture knowledge is tested",
+      "storyIntro": "You step into a vast chamber filled with floating holographic blueprints of cloud architectures. The Guardian reappears, arms crossed. 'This is the Architect's Vault. Here, the terminals test your knowledge of how AWS services work together. Serverless functions, content delivery, identity management, databases — you'll need to know it all.' A massive vault door stands at the far end, sealed with four glowing locks. 'Each correct answer releases one lock. Begin.'",
+      "storyOutro": "The vault door swings open with a deep rumble. Beyond it, a staircase spirals upward into a storm of data streams. 'Two down, one to go,' the Guardian says. 'The Final Escape lies above. Only true cloud masters have ever made it this far. Are you ready?'",
+      "questions": [
+        {
+          "id": 5,
+          "question": "The first vault lock pulses. 'Which AWS service lets you run code without provisioning servers? Name the serverless compute platform.'",
+          "hint": "It's named after the Greek letter λ. Think serverless functions.",
+          "correctAnswer": "AWS Lambda"
+        },
+        {
+          "id": 6,
+          "question": "The second lock crackles with energy. 'What is Amazon CloudFront? Describe its primary purpose in two or three words.'",
+          "hint": "It delivers content to users from edge locations around the world. CDN stands for...",
+          "correctAnswer": "Content Delivery Network"
+        },
+        {
+          "id": 7,
+          "question": "The third lock shimmers. 'Which service manages user access, permissions, and security policies across your entire AWS account?'",
+          "hint": "Three letters: Identity and Access Management.",
+          "correctAnswer": "AWS IAM"
+        },
+        {
+          "id": 8,
+          "question": "The final vault lock blazes crimson. 'Name the AWS NoSQL database service. Get it right and the vault opens.'",
+          "hint": "It's named after a powerful explosive force. Think: Dynamo + DB.",
+          "correctAnswer": "Amazon DynamoDB"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "The Final Escape",
+      "description": "The last chamber — escape or be trapped forever",
+      "storyIntro": "You emerge at the top of the data center. Lightning-like data streams crackle around a massive exit portal, sealed by four final encryptions. The Guardian's form flickers. 'This is it — The Final Escape. These terminals guard the exit portal. Security, monitoring, networking, containers — the toughest challenges await. Solve all four and you walk free. Fail... and you become part of the cloud forever.' The Guardian fades into the shadows. You're on your own now.",
+      "storyOutro": "The exit portal explodes with light. You shield your eyes as reality bends around you. When the light fades, you're standing outside the data center, the night sky filled with stars. The Guardian's voice echoes one last time: 'You've done it, Cloud Master. You've escaped the AWS data center. Few have ever made it this far. Until next time...' The portal closes behind you. You're free.",
+      "questions": [
+        {
+          "id": 9,
+          "question": "The first encryption glows. 'Which pillar of the AWS Well-Architected Framework focuses on protecting information and systems?'",
+          "hint": "It's all about protecting data, managing permissions, and detecting threats. One word.",
+          "correctAnswer": "Security"
+        },
+        {
+          "id": 10,
+          "question": "The second encryption buzzes. 'Which AWS service provides monitoring, logging, and observability for your cloud resources?'",
+          "hint": "It watches over your cloud. Cloud + Watch = ?",
+          "correctAnswer": "Amazon CloudWatch"
+        },
+        {
+          "id": 11,
+          "question": "The third encryption sparks wildly. 'What does VPC stand for in AWS networking?'",
+          "hint": "Your own isolated section of the AWS cloud. Virtual + Private + ?",
+          "correctAnswer": "Virtual Private Cloud"
+        },
+        {
+          "id": 12,
+          "question": "The final encryption — the last barrier to freedom. 'Which AWS service allows you to run containers without managing servers or clusters?'",
+          "hint": "It's a serverless compute engine for containers. Think: Far + gate.",
+          "correctAnswer": "AWS Fargate"
+        }
+      ]
+    }
+  ]
+}
