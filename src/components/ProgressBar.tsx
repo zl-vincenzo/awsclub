@@ -35,7 +35,7 @@ export default function ProgressBar({
                   {isComplete ? "✓" : roundNum}
                 </div>
                 <span className={`text-xs ${isCurrent ? "text-purple-300" : "text-white/30"}`}>
-                  Room {roundNum}
+                  Sector {roundNum}
                 </span>
               </div>
 

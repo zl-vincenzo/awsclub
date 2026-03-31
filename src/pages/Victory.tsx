@@ -10,6 +10,13 @@ interface VictoryProps {
   quizData: QuizData;
 }
 
+const sectorIcons: Record<number, string> = {
+  1: "🔐",
+  2: "🖥️",
+  3: "☁️",
+  4: "🚨",
+};
+
 export default function Victory({
   onRestart,
   totalTimeSeconds,
@@ -27,7 +34,7 @@ export default function Victory({
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const colors = ["#7c3aed", "#a78bfa", "#c084fc", "#6d28d9", "#fff", "#52d49e", "#fbbf24"];
+    const colors = ["#7c3aed", "#a78bfa", "#c084fc", "#6d28d9", "#fff", "#52d49e", "#fbbf24", "#22d3ee"];
 
     interface Confetti {
       x: number; y: number; w: number; h: number;
@@ -96,25 +103,26 @@ export default function Victory({
             </div>
 
             <span className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-semibold uppercase tracking-widest border border-emerald-500/30 mb-4 animate-fade-in">
-              Mission Complete
+              System Restored
             </span>
 
             <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4 animate-slide-up">
-              You{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">
-                Escaped!
-              </span>
+              Neuro
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-purple-300">
+                Link
+              </span>{" "}
+              is Live!
             </h1>
 
             <p className="text-white/40 text-lg animate-slide-up" style={{ animationDelay: "0.1s" }}>
-              Congratulations, Cloud Master! You've escaped the AWS data center.
+              Congratulations! You've brought NeuroLink back online. The platform is fully operational.
             </p>
           </div>
 
           {/* Total time */}
-          <div className="bg-[#1e1145]/60 border border-purple-500/15 rounded-xl p-6 mb-6 text-center animate-slide-up" style={{ animationDelay: "0.15s" }}>
-            <p className="text-white/30 text-sm uppercase tracking-widest mb-2">Total Time</p>
-            <p className="text-4xl font-bold font-mono text-purple-300">
+          <div className="bg-[#1e1145]/60 border border-emerald-500/20 rounded-xl p-6 mb-6 text-center animate-slide-up" style={{ animationDelay: "0.15s" }}>
+            <p className="text-white/30 text-sm uppercase tracking-widest mb-2">Total Recovery Time</p>
+            <p className="text-4xl font-bold font-mono text-emerald-300">
               {formatTime(totalTimeSeconds)}
             </p>
           </div>
@@ -131,8 +139,11 @@ export default function Victory({
                     ✓
                   </div>
                   <div>
-                    <p className="text-white font-semibold text-sm">{rt.title}</p>
-                    <p className="text-white/30 text-xs">Room {rt.round}</p>
+                    <p className="text-white font-semibold text-sm flex items-center gap-2">
+                      <span>{sectorIcons[rt.round] || "⚡"}</span>
+                      {rt.title}
+                    </p>
+                    <p className="text-white/30 text-xs">Sector {rt.round}</p>
                   </div>
                 </div>
                 <span className="text-purple-300 font-mono font-bold">
@@ -145,14 +156,14 @@ export default function Victory({
           {/* Correct answers */}
           <div className="bg-[#1e1145]/60 border border-purple-500/15 rounded-xl overflow-hidden mb-8 animate-slide-up" style={{ animationDelay: "0.25s" }}>
             <div className="px-5 py-3 border-b border-purple-500/10">
-              <h3 className="text-white font-bold text-sm uppercase tracking-wider">All Correct Answers</h3>
+              <h3 className="text-white font-bold text-sm uppercase tracking-wider">All System Codes</h3>
             </div>
             <div className="divide-y divide-purple-500/5">
               {quizData.rounds.map((round) =>
                 round.questions.map((q) => (
                   <div key={q.id} className="px-5 py-3 flex items-start gap-3">
                     <span className="text-purple-400/50 text-xs font-mono mt-0.5 shrink-0">
-                      Q{q.id}
+                      T{q.id}
                     </span>
                     <div className="flex-1 min-w-0">
                       <p className="text-white/50 text-sm truncate">

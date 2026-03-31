@@ -101,7 +101,7 @@ export default function App() {
           key={`intro-${currentRound}`}
           text={round.storyIntro}
           onComplete={handleStoryIntroDone}
-          buttonLabel="Enter the Room"
+          buttonLabel="Enter Sector"
         />
       );
 
@@ -123,7 +123,7 @@ export default function App() {
           key={`outro-${currentRound}`}
           text={round.storyOutro}
           onComplete={handleOutroDone}
-          buttonLabel={currentRound + 1 >= totalRounds ? "See Results" : "Next Room"}
+          buttonLabel={currentRound + 1 >= totalRounds ? "See Results" : "Next Sector"}
         />
       );
 

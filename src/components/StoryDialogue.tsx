@@ -28,7 +28,8 @@ export default function StoryDialogue({
       setIsTyping(false);
       return;
     }
-    const speed = text[charIndex] === "." || text[charIndex] === "'" ? 80 : 20;
+    const char = text[charIndex];
+    const speed = char === "." || char === "'" || char === "\n" ? 80 : 18;
     const timer = setTimeout(() => {
       setDisplayedText((prev) => prev + text[charIndex]);
       setCharIndex((prev) => prev + 1);
@@ -46,7 +47,16 @@ export default function StoryDialogue({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0d0221]/95 backdrop-blur-md animate-fade-in">
-      <div className="max-w-2xl mx-auto px-6 w-full">
+      {/* Scanline overlay */}
+      <div
+        className="fixed inset-0 pointer-events-none z-50 opacity-[0.02]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 4px)",
+        }}
+      />
+
+      <div className="max-w-2xl mx-auto px-6 w-full relative z-50">
         {/* Character */}
         <div className="flex justify-center mb-8">
           <CharacterAvatar size="lg" />
@@ -55,19 +65,19 @@ export default function StoryDialogue({
         {/* Name tag */}
         <div className="text-center mb-4">
           <span className="inline-block px-4 py-1 rounded-full bg-purple-500/20 text-purple-300 text-sm font-semibold uppercase tracking-widest border border-purple-500/30">
-            Cloud Guardian
+            ARIA — Emergency AI
           </span>
         </div>
 
         {/* Speech bubble */}
         <div
-          className="relative bg-[#1e1145]/80 border border-purple-500/20 rounded-2xl p-6 mb-8 min-h-[160px] cursor-pointer"
+          className="relative bg-[#1e1145]/80 border border-purple-500/20 rounded-2xl p-6 mb-8 min-h-[160px] max-h-[40vh] overflow-y-auto cursor-pointer"
           onClick={handleSkip}
         >
           {/* Speech arrow */}
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-[#1e1145]/80 border-l border-t border-purple-500/20 rotate-45" />
 
-          <p className="text-white/80 text-base md:text-lg leading-relaxed relative z-10">
+          <p className="text-white/80 text-base md:text-lg leading-relaxed relative z-10 whitespace-pre-line">
             {displayedText}
             {isTyping && (
               <span className="inline-block w-0.5 h-5 bg-purple-400 ml-1 align-middle animate-typewriter-blink" />

@@ -2,100 +2,109 @@
   "rounds": [
     {
       "id": 1,
-      "title": "The Cloud Foundation",
-      "description": "The first chamber of the AWS data center",
-      "storyIntro": "You wake up in a cold, humming server room. Rows of blinking lights stretch into the darkness. A holographic figure materializes before you — the Cloud Guardian. 'Welcome, traveler,' the figure whispers. 'You've been trapped inside the AWS data center. The only way out is through three locked chambers. Each chamber holds four encrypted terminals. Crack the code on each terminal to unlock the door. But beware — you have only 10 minutes per chamber before the security lockdown seals you in forever.' The Guardian gestures toward the first glowing terminal. 'Let's begin with the foundations. Show me you understand the basics of the cloud.'",
-      "storyOutro": "The first door groans open, revealing a corridor bathed in purple light. 'Impressive,' the Guardian nods. 'But the next chamber won't be so forgiving. The Architect's Vault awaits — where only those who understand AWS architecture may pass.'",
+      "title": "Authentication Lockout",
+      "description": "The login system is completely locked — fix it before users are permanently blocked",
+      "storyIntro": "⚠️ CRITICAL SYSTEM FAILURE DETECTED.\n\nYou rush into NeuroLink's command center. Screens are flashing red. The CEO is pacing. Investors are on a live call.\n\nThe AI-powered platform was minutes away from launch — and everything just crashed.\n\nA holographic figure materializes on the main screen — ARIA, NeuroLink's emergency AI assistant.\n\n'Welcome, response team. I'm ARIA. The situation is critical. Our authentication system has been completely locked out. No user can log in. No admin can access the dashboard. The entire identity layer is frozen.'\n\nARIA's eyes pulse with urgency.\n\n'You need to fix the login system first. Without authentication, nothing else matters. Solve the three security terminals to restore access. You have 5 minutes before the auth tokens expire permanently.'",
+      "storyOutro": "The authentication panel glows green. Login restored.\n\nARIA's voice returns: 'Authentication is back online. Users can log in again. But don't celebrate yet — our user interface is completely broken. The frontend is rendering garbage. If users can log in but can't see anything... we're still dead in the water. Move to the next sector. Now.'",
       "questions": [
         {
           "id": 1,
-          "question": "The first terminal flickers to life. A message appears: 'What does AWS stand for? Type the full name to proceed.'",
-          "hint": "Think about the company that created this cloud platform and what kind of services it provides on the web.",
-          "correctAnswer": "Amazon Web Services"
+          "question": "🔐 Terminal 1 is flashing. ARIA speaks: 'Our login system uses a standard web protocol for secure authentication. What does JWT stand for? Type the full form to restore the auth module.'",
+          "hint": "It's a compact token format. J = JSON, W = Web, T = Token.",
+          "correctAnswer": "JSON Web Token"
         },
         {
           "id": 2,
-          "question": "The second terminal hums. 'Which AWS service is the primary object storage service? Name it to unlock.'",
-          "hint": "It's named with the letter S and a number. Think: Simple Storage Service.",
-          "correctAnswer": "Amazon S3"
+          "question": "🔐 Terminal 2 sparks to life. 'The password database has been compromised. We need to re-secure it. What is the process called when you convert a password into a fixed-length string of characters that cannot be reversed?'",
+          "hint": "It's not encryption — you can't reverse it. Think of what a hash function does.",
+          "correctAnswer": "Hashing"
         },
         {
           "id": 3,
-          "question": "Sparks fly from the third terminal. 'What is the default compute service in AWS? The one that gives you virtual servers in the cloud.'",
-          "hint": "EC stands for Elastic Compute. What's the full service name?",
-          "correctAnswer": "Amazon EC2"
-        },
-        {
-          "id": 4,
-          "question": "The final terminal in this chamber glows red. 'Which AWS service provides a managed relational database? Answer correctly and the first door opens.'",
-          "hint": "RDS — Relational Database Service. What's the full AWS service name?",
-          "correctAnswer": "Amazon RDS"
+          "question": "🔐 The final auth terminal blazes crimson. 'Our users need an extra layer of login security beyond just a password. What is this security method called? Two words.'",
+          "hint": "It involves two steps — something you know (password) and something you have (phone code). Two-_____ Authentication.",
+          "correctAnswer": "Two Factor Authentication"
         }
       ]
     },
     {
       "id": 2,
-      "title": "The Architect's Vault",
-      "description": "The second chamber — where architecture knowledge is tested",
-      "storyIntro": "You step into a vast chamber filled with floating holographic blueprints of cloud architectures. The Guardian reappears, arms crossed. 'This is the Architect's Vault. Here, the terminals test your knowledge of how AWS services work together. Serverless functions, content delivery, identity management, databases — you'll need to know it all.' A massive vault door stands at the far end, sealed with four glowing locks. 'Each correct answer releases one lock. Begin.'",
-      "storyOutro": "The vault door swings open with a deep rumble. Beyond it, a staircase spirals upward into a storm of data streams. 'Two down, one to go,' the Guardian says. 'The Final Escape lies above. Only true cloud masters have ever made it this far. Are you ready?'",
+      "title": "Interface Meltdown",
+      "description": "The user interface is broken — nothing renders correctly",
+      "storyIntro": "You step into NeuroLink's frontend engineering bay. Screens everywhere show broken layouts, missing components, and garbled text.\n\nARIA appears on a cracked monitor.\n\n'The UI layer is in total meltdown. Our frontend framework is failing. CSS is not loading. Components aren't rendering. Users who just regained login access are seeing a blank white screen.'\n\nShe gestures toward three corrupted terminals.\n\n'The interface was built with modern web technologies. You need to understand how they work to fix this. Solve these three terminals to restore the UI. Clock is ticking — 5 minutes.'",
+      "storyOutro": "The screens around you flicker — and then snap into crystal-clear resolution. The UI is back.\n\nARIA nods approvingly. 'Beautiful. The interface is rendering perfectly. But we've got a bigger problem incoming. Our cloud infrastructure is misconfigured. The servers, storage, and databases that power NeuroLink's AI engine are all pointing to the wrong endpoints. If we don't fix the cloud layer, the platform has no brain. Move to Sector 3.'",
       "questions": [
         {
+          "id": 4,
+          "question": "🖥️ The first UI terminal boots up. 'Our frontend is built with a popular JavaScript library created by Facebook for building user interfaces with a component-based architecture. Name this library.'",
+          "hint": "It lets you build UIs with reusable components. It's not Angular or Vue. Think of a chemical reaction.",
+          "correctAnswer": "React"
+        },
+        {
           "id": 5,
-          "question": "The first vault lock pulses. 'Which AWS service lets you run code without provisioning servers? Name the serverless compute platform.'",
-          "hint": "It's named after the Greek letter λ. Think serverless functions.",
-          "correctAnswer": "AWS Lambda"
+          "question": "🖥️ Terminal 2 shows corrupted styles. 'Our stylesheet language extends CSS with variables, nesting, and mixins. What is this CSS preprocessor called? It compiles into regular CSS.'",
+          "hint": "It's Syntactically Awesome. Think: S-A-S-S.",
+          "correctAnswer": "SASS"
         },
         {
           "id": 6,
-          "question": "The second lock crackles with energy. 'What is Amazon CloudFront? Describe its primary purpose in two or three words.'",
-          "hint": "It delivers content to users from edge locations around the world. CDN stands for...",
-          "correctAnswer": "Content Delivery Network"
-        },
-        {
-          "id": 7,
-          "question": "The third lock shimmers. 'Which service manages user access, permissions, and security policies across your entire AWS account?'",
-          "hint": "Three letters: Identity and Access Management.",
-          "correctAnswer": "AWS IAM"
-        },
-        {
-          "id": 8,
-          "question": "The final vault lock blazes crimson. 'Name the AWS NoSQL database service. Get it right and the vault opens.'",
-          "hint": "It's named after a powerful explosive force. Think: Dynamo + DB.",
-          "correctAnswer": "Amazon DynamoDB"
+          "question": "🖥️ The final UI terminal crackles. 'Our layout system uses a CSS model that distributes space along a single axis — row or column. What is this CSS layout model called?'",
+          "hint": "It makes elements flexible. CSS ______box.",
+          "correctAnswer": "Flexbox"
         }
       ]
     },
     {
       "id": 3,
-      "title": "The Final Escape",
-      "description": "The last chamber — escape or be trapped forever",
-      "storyIntro": "You emerge at the top of the data center. Lightning-like data streams crackle around a massive exit portal, sealed by four final encryptions. The Guardian's form flickers. 'This is it — The Final Escape. These terminals guard the exit portal. Security, monitoring, networking, containers — the toughest challenges await. Solve all four and you walk free. Fail... and you become part of the cloud forever.' The Guardian fades into the shadows. You're on your own now.",
-      "storyOutro": "The exit portal explodes with light. You shield your eyes as reality bends around you. When the light fades, you're standing outside the data center, the night sky filled with stars. The Guardian's voice echoes one last time: 'You've done it, Cloud Master. You've escaped the AWS data center. Few have ever made it this far. Until next time...' The portal closes behind you. You're free.",
+      "title": "Cloud Chaos",
+      "description": "Cloud services are misconfigured — the platform's brain is offline",
+      "storyIntro": "You descend into NeuroLink's cloud infrastructure vault. Server racks hum with chaotic energy. Warning lights strobe across the ceiling.\n\nARIA materializes, her form glitching slightly.\n\n'This is bad. Our entire cloud infrastructure is misconfigured. The AI models can't connect to their data. File storage is pointing to deleted buckets. The database is unreachable.'\n\nShe steadies herself.\n\n'NeuroLink runs on cloud services. If you understand how cloud computing works — storage, compute, serverless — you can reconfigure the system. Three terminals. Five minutes. The platform's intelligence depends on you.'",
+      "storyOutro": "The server racks hum with renewed purpose. Cloud infrastructure: online.\n\nARIA reappears, but this time with alarm in her voice.\n\n'The cloud is back — but we've just detected a massive traffic surge heading our way. Thousands of users are hitting the platform simultaneously. Our servers aren't scaled to handle this load. If we don't prepare for the surge, everything we just fixed will crash again under the weight of real users. This is the final sector. Go. NOW.'",
       "questions": [
         {
-          "id": 9,
-          "question": "The first encryption glows. 'Which pillar of the AWS Well-Architected Framework focuses on protecting information and systems?'",
-          "hint": "It's all about protecting data, managing permissions, and detecting threats. One word.",
-          "correctAnswer": "Security"
+          "id": 7,
+          "question": "☁️ Cloud Terminal 1 activates. 'Our files and AI model weights are stored in a cloud object storage service by AWS. What is the name of this service? Give the full AWS name.'",
+          "hint": "It stands for Simple Storage Service. Amazon ___.",
+          "correctAnswer": "Amazon S3"
         },
         {
+          "id": 8,
+          "question": "☁️ Terminal 2 surges with power. 'NeuroLink's API endpoints run on a compute model where we don't manage any servers. The cloud provider runs our code on-demand. What is this computing model called?'",
+          "hint": "You don't manage servers — the cloud handles it. ______less computing.",
+          "correctAnswer": "Serverless"
+        },
+        {
+          "id": 9,
+          "question": "☁️ The final cloud terminal glows dangerously. 'Our AI data is stored in a managed NoSQL database by AWS that provides fast performance at any scale. Name this service.'",
+          "hint": "Think: Dynamo + DB. It's Amazon's flagship NoSQL database.",
+          "correctAnswer": "Amazon DynamoDB"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Traffic Surge",
+      "description": "A massive wave of users is about to hit — scale or collapse",
+      "storyIntro": "Alarms blare. The main dashboard shows a live traffic graph spiking into the red zone. Thousands of connections per second — and climbing.\n\nARIA appears one final time, her projection flickering under the system strain.\n\n'This is it — the final crisis. A viral social media post just sent 50,000 users to NeuroLink simultaneously. Our servers are buckling. Response times are through the roof. If we don't scale the infrastructure right now, every fix you've made today will be destroyed in a cascade failure.'\n\nHer eyes lock onto you.\n\n'You need to understand load balancing, caching, and scaling. Three terminals. Five minutes. This is the last line of defense. If you fail here... the system goes dark. Permanently.'",
+      "storyOutro": "The traffic graph stabilizes. Response times drop. The platform holds.\n\nEvery screen in the command center turns green. NeuroLink is online. Fully operational.\n\nARIA appears one final time — calm, composed, almost smiling.\n\n'You did it. Authentication restored. Interface rebuilt. Cloud reconfigured. Traffic survived. NeuroLink is live.'\n\nShe pauses.\n\n'The investors are watching the dashboard. Users are flooding in. And it's all... working. Perfectly.'\n\nARIA's form begins to fade.\n\n'Thank you, response team. You saved NeuroLink. Until the next crisis...'\n\nThe screens pulse with a soft green glow. Mission complete.",
+      "questions": [
+        {
           "id": 10,
-          "question": "The second encryption buzzes. 'Which AWS service provides monitoring, logging, and observability for your cloud resources?'",
-          "hint": "It watches over your cloud. Cloud + Watch = ?",
-          "correctAnswer": "Amazon CloudWatch"
+          "question": "🚨 Surge Terminal 1 flashes red. 'We need to distribute incoming network traffic across multiple servers so no single server is overwhelmed. What is the name of this technique?'",
+          "hint": "It balances the load across servers. ____ Balancing.",
+          "correctAnswer": "Load Balancing"
         },
         {
           "id": 11,
-          "question": "The third encryption sparks wildly. 'What does VPC stand for in AWS networking?'",
-          "hint": "Your own isolated section of the AWS cloud. Virtual + Private + ?",
-          "correctAnswer": "Virtual Private Cloud"
+          "question": "🚨 Terminal 2 overheats. 'To reduce database load, we store frequently accessed data in a temporary high-speed storage layer. What is this technique called?'",
+          "hint": "You store a copy of data closer to the user for faster access. Think of a browser _____ or Redis.",
+          "correctAnswer": "Caching"
         },
         {
           "id": 12,
-          "question": "The final encryption — the last barrier to freedom. 'Which AWS service allows you to run containers without managing servers or clusters?'",
-          "hint": "It's a serverless compute engine for containers. Think: Far + gate.",
-          "correctAnswer": "AWS Fargate"
+          "question": "🚨 The FINAL terminal — the last barrier. 'Our system needs to automatically add more server instances when traffic increases and remove them when it decreases. What is this AWS feature called? Two words.'",
+          "hint": "It automatically scales. Auto + ______.",
+          "correctAnswer": "Auto Scaling"
         }
       ]
     }

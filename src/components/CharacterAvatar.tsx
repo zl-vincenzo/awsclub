@@ -1,42 +1,42 @@
 export default function CharacterAvatar({ size = "lg" }: { size?: "sm" | "lg" }) {
-  const dims = size === "lg" ? "w-32 h-40" : "w-16 h-20";
-  const hoodSize = size === "lg" ? "w-28 h-28" : "w-14 h-14";
-  const eyeSize = size === "lg" ? "w-2.5 h-3.5" : "w-1.5 h-2";
-  const eyeGap = size === "lg" ? "gap-5" : "gap-2.5";
-  const bodyW = size === "lg" ? "w-20" : "w-10";
-  const bodyH = size === "lg" ? "h-14" : "h-7";
+  const dims = size === "lg" ? "w-32 h-32" : "w-14 h-14";
+  const outerRing = size === "lg" ? "w-28 h-28" : "w-12 h-12";
+  const innerRing = size === "lg" ? "w-20 h-20" : "w-8 h-8";
+  const coreSize = size === "lg" ? "w-10 h-10" : "w-4 h-4";
 
   return (
-    <div className={`${dims} relative animate-float`}>
+    <div className={`${dims} relative animate-float flex items-center justify-center`}>
       {/* Glow aura */}
       <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-2xl animate-glow-pulse" />
 
-      {/* Hood / Head */}
-      <div className={`${hoodSize} mx-auto relative`}>
-        {/* Hood shape */}
-        <div className="w-full h-full rounded-full bg-gradient-to-b from-[#2d1b69] to-[#1a0533] border-2 border-purple-500/30 shadow-[0_0_20px_rgba(124,58,237,0.3)]" />
+      {/* Outer rotating ring */}
+      <div className={`${outerRing} absolute rounded-full border-2 border-purple-500/30 animate-portal-spin`}
+        style={{ borderTopColor: "rgba(192, 132, 252, 0.8)", borderRightColor: "transparent" }}
+      />
 
-        {/* Face shadow */}
-        <div className="absolute inset-3 rounded-full bg-gradient-to-b from-[#0d0221] to-[#1a0533]" />
+      {/* Inner counter-rotating ring */}
+      <div className={`${innerRing} absolute rounded-full border-2 border-purple-400/20`}
+        style={{
+          borderBottomColor: "rgba(167, 139, 250, 0.7)",
+          borderLeftColor: "transparent",
+          animation: "portal-spin 5s linear infinite reverse",
+        }}
+      />
 
-        {/* Eyes */}
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 flex ${eyeGap}`}>
+      {/* Core orb */}
+      <div className={`${coreSize} relative rounded-full bg-gradient-to-br from-purple-400 via-fuchsia-400 to-purple-600 shadow-[0_0_20px_rgba(167,139,250,0.8)] animate-eye-glow`} />
+
+      {/* Scanning line effect (large only) */}
+      {size === "lg" && (
+        <div className="absolute inset-4 rounded-full overflow-hidden pointer-events-none">
           <div
-            className={`${eyeSize} rounded-full bg-purple-400 shadow-[0_0_12px_rgba(167,139,250,0.8)] animate-eye-glow`}
-          />
-          <div
-            className={`${eyeSize} rounded-full bg-purple-400 shadow-[0_0_12px_rgba(167,139,250,0.8)] animate-eye-glow`}
-            style={{ animationDelay: "0.3s" }}
+            className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-purple-400/50 to-transparent"
+            style={{
+              animation: "scan-line 3s ease-in-out infinite",
+            }}
           />
         </div>
-      </div>
-
-      {/* Body / Cloak */}
-      <div className={`${bodyW} ${bodyH} mx-auto -mt-2 relative`}>
-        <div className="w-full h-full bg-gradient-to-b from-[#2d1b69] to-transparent rounded-b-2xl"
-          style={{ clipPath: "polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%)" }}
-        />
-      </div>
+      )}
     </div>
   );
 }

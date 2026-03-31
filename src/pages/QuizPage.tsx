@@ -14,6 +14,13 @@ interface QuizPageProps {
   onTimeUp: () => void;
 }
 
+const sectorIcons: Record<number, string> = {
+  1: "🔐",
+  2: "🖥️",
+  3: "☁️",
+  4: "🚨",
+};
+
 export default function QuizPage({
   round,
   currentQuestion,
@@ -35,20 +42,23 @@ export default function QuizPage({
             <div className="flex items-center gap-3">
               <CharacterAvatar size="sm" />
               <div>
-                <h2 className="text-white font-bold text-lg">{round.title}</h2>
-                <p className="text-white/30 text-sm">Room {round.id} of {totalRounds}</p>
+                <h2 className="text-white font-bold text-lg flex items-center gap-2">
+                  <span>{sectorIcons[round.id] || "⚡"}</span>
+                  {round.title}
+                </h2>
+                <p className="text-white/30 text-sm">Sector {round.id} of {totalRounds}</p>
               </div>
             </div>
 
-            <Timer duration={600} onTimeUp={handleTimeUp} isRunning={true} />
+            <Timer duration={300} onTimeUp={handleTimeUp} isRunning={true} />
 
             <div className="hidden md:flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                <svg className="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+              <div className="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center">
+                <svg className="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                 </svg>
               </div>
-              <span className="text-white/30 text-sm font-medium">Escape Room</span>
+              <span className="text-white/30 text-sm font-medium font-mono">NEUROLINK</span>
             </div>
           </div>
         </header>
