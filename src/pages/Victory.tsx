@@ -8,6 +8,8 @@ interface VictoryProps {
   totalTimeSeconds: number;
   roundTimes: RoundTime[];
   quizData: QuizData;
+  solvedAnswers: Record<number, string>;
+  playerName: string;
 }
 
 const sectorIcons: Record<number, string> = {
@@ -22,6 +24,8 @@ export default function Victory({
   totalTimeSeconds,
   roundTimes,
   quizData,
+  solvedAnswers,
+  playerName,
 }: VictoryProps) {
   const confettiCanvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -115,7 +119,7 @@ export default function Victory({
             </h1>
 
             <p className="text-white/40 text-lg animate-slide-up" style={{ animationDelay: "0.1s" }}>
-              Congratulations! You've brought NeuroLink back online. The platform is fully operational.
+              Congratulations, <span className="text-purple-300 font-semibold">{playerName}</span>! You've brought NeuroLink back online.
             </p>
           </div>
 
@@ -153,10 +157,10 @@ export default function Victory({
             ))}
           </div>
 
-          {/* Correct answers */}
+          {/* Correct answers - shows user's typed answers */}
           <div className="bg-[#1e1145]/60 border border-purple-500/15 rounded-xl overflow-hidden mb-8 animate-slide-up" style={{ animationDelay: "0.25s" }}>
             <div className="px-5 py-3 border-b border-purple-500/10">
-              <h3 className="text-white font-bold text-sm uppercase tracking-wider">All System Codes</h3>
+              <h3 className="text-white font-bold text-sm uppercase tracking-wider">Your Answers</h3>
             </div>
             <div className="divide-y divide-purple-500/5">
               {quizData.rounds.map((round) =>
@@ -167,10 +171,10 @@ export default function Victory({
                     </span>
                     <div className="flex-1 min-w-0">
                       <p className="text-white/50 text-sm truncate">
-                        {q.question.split("'")[1] || q.question.substring(0, 60) + "..."}
+                        {q.question.substring(0, 60) + "..."}
                       </p>
                       <p className="text-emerald-400 font-semibold text-sm mt-0.5">
-                        {q.correctAnswer}
+                        {solvedAnswers[q.id] || "—"}
                       </p>
                     </div>
                   </div>

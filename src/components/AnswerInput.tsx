@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import type { Question } from "../types/types";
+import { hashAnswer } from "../utils/hashAnswer";
 
 interface AnswerInputProps {
   question: Question;
-  onCorrectAnswer: () => void;
+  onCorrectAnswer: (userAnswer: string) => void;
   questionNumber: number;
 }
 
@@ -14,36 +15,30 @@ export default function AnswerInput({
 }: AnswerInputProps) {
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
-  const [showHint, setShowHint] = useState(false);
   const [shakeKey, setShakeKey] = useState(0);
-  const [attempts, setAttempts] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setAnswer("");
     setFeedback(null);
-    setShowHint(false);
-    setAttempts(0);
     inputRef.current?.focus();
   }, [question.id]);
 
-  const normalize = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!answer.trim() || feedback === "correct") return;
 
-    const isCorrect = normalize(answer) === normalize(question.correctAnswer);
+    const userHash = await hashAnswer(answer);
+    const isCorrect = userHash === question.answerHash;
 
     if (isCorrect) {
       setFeedback("correct");
       setTimeout(() => {
-        onCorrectAnswer();
+        onCorrectAnswer(answer.trim());
       }, 1200);
     } else {
       setFeedback("wrong");
       setShakeKey((prev) => prev + 1);
-      setAttempts((prev) => prev + 1);
       setTimeout(() => {
         setFeedback(null);
         setAnswer("");
@@ -69,8 +64,8 @@ export default function AnswerInput({
 
       {/* Question / narrative text */}
       <div className="bg-[#1e1145]/60 border border-purple-500/15 rounded-xl p-5 mb-6">
-        <p className="text-white/80 text-base md:text-lg leading-relaxed italic">
-          "{question.question}"
+        <p className="text-white/80 text-base md:text-lg leading-relaxed whitespace-pre-line">
+          {question.question}
         </p>
       </div>
 
@@ -94,7 +89,6 @@ export default function AnswerInput({
               }`}
               autoComplete="off"
             />
-            {/* Cursor glow */}
             <div className="absolute right-4 top-1/2 -translate-y-1/2">
               {feedback === "correct" && (
                 <svg className="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -133,26 +127,6 @@ export default function AnswerInput({
           </p>
         </div>
       )}
-
-      {/* Hint system */}
-      <div className="text-center">
-        {!showHint && attempts >= 2 && (
-          <button
-            onClick={() => setShowHint(true)}
-            className="text-purple-400/60 text-sm hover:text-purple-300 transition-colors cursor-pointer underline underline-offset-4"
-          >
-            Need a hint?
-          </button>
-        )}
-        {showHint && (
-          <div className="inline-flex items-start gap-2 px-4 py-3 rounded-lg bg-purple-500/10 border border-purple-500/20 animate-fade-in">
-            <svg className="w-5 h-5 text-purple-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.44 2.211a8.407 8.407 0 01-2.38 0" />
-            </svg>
-            <p className="text-purple-300/70 text-sm text-left">{question.hint}</p>
-          </div>
-        )}
-      </div>
     </div>
   );
 }

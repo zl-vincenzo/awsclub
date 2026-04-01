@@ -1,12 +1,14 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { GameStatus } from "./types/types";
-import type { QuizData, RoundTime } from "./types/types";
+import type { QuizData, RoundTime, PlayerResult } from "./types/types";
 import questionsData from "./data/questions.json";
 import LandingPage from "./pages/LandingPage";
+import NameEntry from "./pages/NameEntry";
 import QuizPage from "./pages/QuizPage";
 import GameOver from "./pages/GameOver";
 import Victory from "./pages/Victory";
 import StoryDialogue from "./components/StoryDialogue";
+import { useWebSocket } from "./hooks/useWebSocket";
 
 const data: QuizData = questionsData;
 
@@ -18,18 +20,37 @@ export default function App() {
   const [roundStartTime, setRoundStartTime] = useState(0);
   const [roundTimes, setRoundTimes] = useState<RoundTime[]>([]);
   const [totalTimeSeconds, setTotalTimeSeconds] = useState(0);
+  const [playerName, setPlayerName] = useState("");
+  const [solvedAnswers, setSolvedAnswers] = useState<Record<number, string>>({});
+
+  const ws = useWebSocket();
+  const wsConnected = useRef(false);
+
+  // Connect WebSocket once
+  useEffect(() => {
+    if (!wsConnected.current) {
+      ws.connect();
+      wsConnected.current = true;
+    }
+  }, [ws]);
 
   const totalRounds = data.rounds.length;
   const round = data.rounds[currentRound];
 
   const handleStart = useCallback(() => {
-    const now = Date.now();
     setCurrentRound(0);
     setCurrentQuestion(0);
-    setStartTime(now);
-    setRoundStartTime(now);
     setRoundTimes([]);
     setTotalTimeSeconds(0);
+    setSolvedAnswers({});
+    setStatus(GameStatus.NAME_ENTRY);
+  }, []);
+
+  const handleNameSubmit = useCallback((name: string) => {
+    setPlayerName(name);
+    const now = Date.now();
+    setStartTime(now);
+    setRoundStartTime(now);
     setStatus(GameStatus.STORY_INTRO);
   }, []);
 
@@ -39,61 +60,92 @@ export default function App() {
     setStatus(GameStatus.PLAYING);
   }, []);
 
-  const handleCorrectAnswer = useCallback(() => {
-    const nextQuestion = currentQuestion + 1;
+  const handleCorrectAnswer = useCallback(
+    (userAnswer: string) => {
+      const question = round.questions[currentQuestion];
+      setSolvedAnswers((prev) => ({ ...prev, [question.id]: userAnswer }));
 
-    if (nextQuestion >= round.questions.length) {
-      // Round complete — record round time
-      const roundElapsed = Math.floor((Date.now() - roundStartTime) / 1000);
-      const newRoundTime: RoundTime = {
-        round: round.id,
-        title: round.title,
-        timeSeconds: roundElapsed,
-      };
+      const nextQuestion = currentQuestion + 1;
 
-      setRoundTimes((prev) => [...prev, newRoundTime]);
+      if (nextQuestion >= round.questions.length) {
+        const roundElapsed = Math.floor((Date.now() - roundStartTime) / 1000);
+        const newRoundTime: RoundTime = {
+          round: round.id,
+          title: round.title,
+          timeSeconds: roundElapsed,
+        };
 
-      const nextRound = currentRound + 1;
-      if (nextRound >= totalRounds) {
-        // Show outro story, then victory
-        const totalElapsed = Math.floor((Date.now() - startTime) / 1000);
-        setTotalTimeSeconds(totalElapsed);
-        setStatus(GameStatus.STORY_OUTRO);
+        setRoundTimes((prev) => [...prev, newRoundTime]);
+
+        const nextRound = currentRound + 1;
+        if (nextRound >= totalRounds) {
+          const totalElapsed = Math.floor((Date.now() - startTime) / 1000);
+          setTotalTimeSeconds(totalElapsed);
+          setStatus(GameStatus.STORY_OUTRO);
+        } else {
+          setStatus(GameStatus.STORY_OUTRO);
+        }
       } else {
-        // Show outro story, then next round intro
-        setStatus(GameStatus.STORY_OUTRO);
+        setCurrentQuestion(nextQuestion);
       }
-    } else {
-      setCurrentQuestion(nextQuestion);
-    }
-  }, [currentQuestion, currentRound, round, totalRounds, roundStartTime, startTime]);
+    },
+    [currentQuestion, currentRound, round, totalRounds, roundStartTime, startTime]
+  );
 
   const handleOutroDone = useCallback(() => {
     const nextRound = currentRound + 1;
     if (nextRound >= totalRounds) {
+      // Send result via WebSocket
+      const result: PlayerResult = {
+        playerName,
+        totalTimeSeconds,
+        roundTimes: [...roundTimes],
+        completedAt: new Date().toISOString(),
+        sectorsCompleted: totalRounds,
+        totalSectors: totalRounds,
+        status: "completed",
+      };
+      ws.submitResult(result);
       setStatus(GameStatus.GAME_WON);
     } else {
       setCurrentRound(nextRound);
       setCurrentQuestion(0);
       setStatus(GameStatus.STORY_INTRO);
     }
-  }, [currentRound, totalRounds]);
+  }, [currentRound, totalRounds, playerName, totalTimeSeconds, roundTimes, ws]);
 
   const handleTimeUp = useCallback(() => {
+    // Send failed result via WebSocket
+    const totalElapsed = Math.floor((Date.now() - startTime) / 1000);
+    const result: PlayerResult = {
+      playerName,
+      totalTimeSeconds: totalElapsed,
+      roundTimes: [...roundTimes],
+      completedAt: new Date().toISOString(),
+      sectorsCompleted: currentRound + 1,
+      totalSectors: totalRounds,
+      status: "failed",
+    };
+    ws.submitResult(result);
     setStatus(GameStatus.GAME_OVER);
-  }, []);
+  }, [playerName, startTime, roundTimes, currentRound, totalRounds, ws]);
 
   const handleRetry = useCallback(() => {
     setCurrentRound(0);
     setCurrentQuestion(0);
     setRoundTimes([]);
     setTotalTimeSeconds(0);
+    setSolvedAnswers({});
+    setPlayerName("");
     setStatus(GameStatus.LANDING);
   }, []);
 
   switch (status) {
     case GameStatus.LANDING:
       return <LandingPage onStart={handleStart} />;
+
+    case GameStatus.NAME_ENTRY:
+      return <NameEntry onSubmit={handleNameSubmit} />;
 
     case GameStatus.STORY_INTRO:
       return (
@@ -142,6 +194,8 @@ export default function App() {
           totalTimeSeconds={totalTimeSeconds}
           roundTimes={roundTimes}
           quizData={data}
+          solvedAnswers={solvedAnswers}
+          playerName={playerName}
         />
       );
 

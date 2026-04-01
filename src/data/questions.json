@@ -10,20 +10,17 @@
         {
           "id": 1,
           "question": "🔐 Terminal 1 is flashing. ARIA speaks: 'Our login system uses a standard web protocol for secure authentication. What does JWT stand for? Type the full form to restore the auth module.'",
-          "hint": "It's a compact token format. J = JSON, W = Web, T = Token.",
-          "correctAnswer": "JSON Web Token"
+          "answerHash": "500a5c99d6e4b04f622609a6cf16162882cb82cfba856a7cdaf397c023aeda2e"
         },
         {
           "id": 2,
           "question": "🔐 Terminal 2 sparks to life. 'The password database has been compromised. We need to re-secure it. What is the process called when you convert a password into a fixed-length string of characters that cannot be reversed?'",
-          "hint": "It's not encryption — you can't reverse it. Think of what a hash function does.",
-          "correctAnswer": "Hashing"
+          "answerHash": "e365cd9c617713a54c6455f9d8998ba16e81e5078585f33a2ddca8f03a3e8593"
         },
         {
           "id": 3,
           "question": "🔐 The final auth terminal blazes crimson. 'Our users need an extra layer of login security beyond just a password. What is this security method called? Two words.'",
-          "hint": "It involves two steps — something you know (password) and something you have (phone code). Two-_____ Authentication.",
-          "correctAnswer": "Two Factor Authentication"
+          "answerHash": "1748211e4cfd2b80b36b4405030970442554970892c7f34c4e0f1379c6c7631c"
         }
       ]
     },
@@ -37,20 +34,17 @@
         {
           "id": 4,
           "question": "🖥️ The first UI terminal boots up. 'Our frontend is built with a popular JavaScript library created by Facebook for building user interfaces with a component-based architecture. Name this library.'",
-          "hint": "It lets you build UIs with reusable components. It's not Angular or Vue. Think of a chemical reaction.",
-          "correctAnswer": "React"
+          "answerHash": "275976081ce1abf67779eb3c388b5e14531082e52137502e264776e1a6a11595"
         },
         {
           "id": 5,
           "question": "🖥️ Terminal 2 shows corrupted styles. 'Our stylesheet language extends CSS with variables, nesting, and mixins. What is this CSS preprocessor called? It compiles into regular CSS.'",
-          "hint": "It's Syntactically Awesome. Think: S-A-S-S.",
-          "correctAnswer": "SASS"
+          "answerHash": "30d76660f57118fd848a802e1a135da4eb86e5a1a449c9a06ad4f94212678bf3"
         },
         {
           "id": 6,
           "question": "🖥️ The final UI terminal crackles. 'Our layout system uses a CSS model that distributes space along a single axis — row or column. What is this CSS layout model called?'",
-          "hint": "It makes elements flexible. CSS ______box.",
-          "correctAnswer": "Flexbox"
+          "answerHash": "08e857f6f01f391e79fe818b5d5164d5efd9f49596a0e6acce1cbd180b94bcef"
         }
       ]
     },
@@ -64,20 +58,17 @@
         {
           "id": 7,
           "question": "☁️ Cloud Terminal 1 activates. 'Our files and AI model weights are stored in a cloud object storage service by AWS. What is the name of this service? Give the full AWS name.'",
-          "hint": "It stands for Simple Storage Service. Amazon ___.",
-          "correctAnswer": "Amazon S3"
+          "answerHash": "ebf704baa88d015eff4194ec841274257c0146827f2222038698d4af64dcf688"
         },
         {
           "id": 8,
           "question": "☁️ Terminal 2 surges with power. 'NeuroLink's API endpoints run on a compute model where we don't manage any servers. The cloud provider runs our code on-demand. What is this computing model called?'",
-          "hint": "You don't manage servers — the cloud handles it. ______less computing.",
-          "correctAnswer": "Serverless"
+          "answerHash": "e97b1c01299966c52cbdfa83ec50224cf4064b09d1575722ae1280bd27a53d1c"
         },
         {
           "id": 9,
           "question": "☁️ The final cloud terminal glows dangerously. 'Our AI data is stored in a managed NoSQL database by AWS that provides fast performance at any scale. Name this service.'",
-          "hint": "Think: Dynamo + DB. It's Amazon's flagship NoSQL database.",
-          "correctAnswer": "Amazon DynamoDB"
+          "answerHash": "f6fce77d4a6f6d04547ac6d5d84210c242a7fdf033bf681b438588b016d73cec"
         }
       ]
     },
@@ -91,20 +82,17 @@
         {
           "id": 10,
           "question": "🚨 Surge Terminal 1 flashes red. 'We need to distribute incoming network traffic across multiple servers so no single server is overwhelmed. What is the name of this technique?'",
-          "hint": "It balances the load across servers. ____ Balancing.",
-          "correctAnswer": "Load Balancing"
+          "answerHash": "fb6e3b94cf5e2473d3ee90bae783f738170240445e757fc25d25b396fcd5f0ce"
         },
         {
           "id": 11,
           "question": "🚨 Terminal 2 overheats. 'To reduce database load, we store frequently accessed data in a temporary high-speed storage layer. What is this technique called?'",
-          "hint": "You store a copy of data closer to the user for faster access. Think of a browser _____ or Redis.",
-          "correctAnswer": "Caching"
+          "answerHash": "6fe78deb222783bc4f547007a32471da36efc0c41bbe4cb738dbe9e46cc7f8c4"
         },
         {
           "id": 12,
           "question": "🚨 The FINAL terminal — the last barrier. 'Our system needs to automatically add more server instances when traffic increases and remove them when it decreases. What is this AWS feature called? Two words.'",
-          "hint": "It automatically scales. Auto + ______.",
-          "correctAnswer": "Auto Scaling"
+          "answerHash": "ce10f35bc694c02ca708561c7d1e5855300779b85a18994898cfcddb0d9efdcf"
         }
       ]
     }

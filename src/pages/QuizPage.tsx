@@ -10,7 +10,7 @@ interface QuizPageProps {
   round: Round;
   currentQuestion: number;
   totalRounds: number;
-  onCorrectAnswer: () => void;
+  onCorrectAnswer: (userAnswer: string) => void;
   onTimeUp: () => void;
 }
 
