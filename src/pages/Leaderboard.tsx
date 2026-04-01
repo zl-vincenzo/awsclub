@@ -179,7 +179,8 @@ export default function Leaderboard() {
               <div className="col-span-2 text-center">Status</div>
               <div className="col-span-2 text-center">Sectors</div>
               <div className="col-span-2 text-center">Time</div>
-              <div className="col-span-2 text-center">Completed At</div>
+              <div className="col-span-1 text-center">Time</div>
+              <div className="col-span-1 text-center">Action</div>
             </div>
 
             {/* Table body */}
@@ -247,10 +248,23 @@ export default function Leaderboard() {
                     </div>
 
                     {/* Completed at */}
-                    <div className="col-span-2 text-center">
+                    <div className="col-span-1 text-center">
                       <span className="text-white/30 text-xs">
                         {new Date(r.completedAt).toLocaleTimeString()}
                       </span>
+                    </div>
+
+                    {/* Delete Action */}
+                    <div className="col-span-1 text-center">
+                      <button
+                        onClick={() => r.id && ws.deleteResult(r.id)}
+                        className="p-1.5 rounded-md hover:bg-red-500/20 text-white/20 hover:text-red-400 transition-colors"
+                        title="Delete user"
+                      >
+                        <svg className="w-4 h-4 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      </button>
                     </div>
                   </div>
                 ))}

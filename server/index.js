@@ -72,6 +72,26 @@ wss.on("connection", (ws) => {
           break;
         }
 
+        case "DELETE_RESULT": {
+          if (ws._isAdmin && msg.data && msg.data.id) {
+            const index = results.findIndex((r) => r.id === msg.data.id);
+            if (index !== -1) {
+              const deletedName = results[index].playerName;
+              results.splice(index, 1);
+              console.log(`🧹 Admin deleted user: ${deletedName}`);
+              
+              const broadcast = JSON.stringify({
+                type: "RESULTS_UPDATE",
+                data: getSortedResults(),
+              });
+              wss.clients.forEach((client) => {
+                if (client.readyState === 1) client.send(broadcast);
+              });
+            }
+          }
+          break;
+        }
+
         default:
           ws.send(JSON.stringify({ type: "ERROR", message: "Unknown message type" }));
       }

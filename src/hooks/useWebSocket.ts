@@ -72,11 +72,17 @@ export function useWebSocket() {
     send("GET_RESULTS");
   }, [send]);
 
+  const deleteResult = useCallback((id: string) => {
+    if (window.confirm("Delete this user's result?")) {
+      send("DELETE_RESULT", { id });
+    }
+  }, [send]);
+
   useEffect(() => {
     return () => {
       wsRef.current?.close();
     };
   }, []);
 
-  return { connect, on, send, submitResult, authenticate, getResults };
+  return { connect, on, send, submitResult, authenticate, getResults, deleteResult };
 }
